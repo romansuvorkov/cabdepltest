@@ -1,0 +1,91 @@
+.main_header_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.header_wrapper {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+}
+
+.company_list_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.card {
+  border-radius: 5px;
+  box-shadow: 6px 6px 6px 0 rgba(0, 0, 0, 0.5),
+    -6px -6px 15px 0 rgba(255, 255, 255, 0.897);
+  box-sizing: border-box;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.company_card {
+  width: 35%;
+  display: flex;
+  flex-wrap: wrap;
+  /* border-radius: 5px;
+  box-shadow: 6px 6px 6px 0 rgba(0, 0, 0, 0.5),
+    -6px -6px 15px 0 rgba(255, 255, 255, 0.897);
+  box-sizing: border-box;
+  padding: 10px;
+  margin-bottom: 20px; */
+}
+
+.company_card_title {
+  color: #0091ff;
+  width: 100%;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.company_card_info {
+  display: block;
+  width: 100%;
+}
+
+.company_info_wrapper {
+  display: flex;
+  justify-content: space-around;
+}
+
+.underline::after {
+  content: "";
+  display: block;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 4px;
+  background: linear-gradient(
+    150deg,
+    rgba(92, 92, 92, 0.3) 0%,
+    rgba(37, 37, 37, 0.8) 100%
+  );
+  background-color: #0091ff;
+  margin-top: 5px;
+}
+
+.bold_text {
+  font-weight: 700;
+}
+
+.product_list_wrapper {
+  width: 30%;
+}
+
+.declarations_list_wrapper {
+  width: 30%;
+}
+
+.sertificates_list_wrapper {
+  width: 30%;
+}
+
+h2 {
+  text-align: center;
+}
