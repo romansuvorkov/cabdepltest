@@ -1,3 +1,7 @@
+body {
+  background-color: #e6e7ee;
+}
+
 .main_header_wrapper {
   display: flex;
   flex-wrap: wrap;
