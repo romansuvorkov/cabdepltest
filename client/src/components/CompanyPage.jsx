@@ -8,6 +8,7 @@ function CompanyPage({ match, history }) {
     const [declarations, setDeclarations] = useState([]);
     const [certificates, setCertificates] = useState([]);
     const [company, setCompany] = useState([]);
+    const [interGasCert, setInterGasCert] = useState([]);
 
     useEffect(() => {
         console.log(match.params.id);
@@ -24,6 +25,7 @@ function CompanyPage({ match, history }) {
             setDeclarations(data.data.declarations);
             setCertificates(data.data.certificates);
             setCompany(data.data.company);
+            setInterGasCert(data.data.interGasCert);
         }
         fetchData();
     }, [match.params.id]);
@@ -69,6 +71,18 @@ function CompanyPage({ match, history }) {
                     <span className="company_card_info">Продукция: {item.product_group}</span>
                     <span className="company_card_info">Изделие: {item.product_info}</span>
                     <span className="company_card_info">ID сертификата: {item.id_cert}</span>
+                </div>
+            ))}            
+        </div>
+        <div className="intergascert_list_wrapper">
+            <span className="company_card_info"><span className="bold_text">Информация с сайта ИНТЕРГАЗСЕРТ</span></span>
+            {interGasCert.length > 0 && interGasCert.map((item) => (
+                <div className="product_card card" key={uuidv4()}>
+                    <span className="company_card_title underline">{item.cert_id}</span>
+                    <span className="company_card_info">Изготовитель: {item.manufacturer}</span>
+                    <span className="company_card_info">Заявитель: {item.applicant}</span>
+                    <span className="company_card_info">Дата сертификата: {item.cert_date_begin}</span>
+                    <span className="company_card_info">Продукция: {item.product_name}</span>
                 </div>
             ))}            
         </div>

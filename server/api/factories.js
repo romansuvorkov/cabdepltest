@@ -6,7 +6,7 @@ const { ObjectId } = require("mongodb");
 
 const router = express.Router();
 
-router.get("/",  async (req, res) => {
+router.get("/", async (req, res) => {
   // console.log("req.db");
   // console.log(req.db);
   const output = await req.db.collection("factories").find({}).toArray();
@@ -15,29 +15,54 @@ router.get("/",  async (req, res) => {
   res.json(output);
 });
 
-router.get("/:id",  async (req, res) => {
+router.get("/:id", async (req, res) => {
   // console.log("req.params.id");
   // console.log(typeof req.params.id);
   const company = await req.db.collection("factories").findOne({
-    inn: parseInt(req.params.id, 10)
+    inn: parseInt(req.params.id, 10),
   });
   console.log("company");
   console.log(company);
-  const products = await req.db.collection("products").find({
-    manufaturerOGRN: company.ogrn
-  }).skip(0).limit(25).toArray();
-  const declarations = await req.db.collection("declarations").find({
-    manufacturer_ogrn: company.ogrn.toString()
-  }).skip(0).limit(25).toArray();
-  const certificates = await req.db.collection("certificates").find({
-    applicant_ogrn: company.ogrn.toString()
-  }).skip(0).limit(25).toArray();
+  const products = await req.db
+    .collection("products")
+    .find({
+      manufaturerOGRN: company.ogrn,
+    })
+    .skip(0)
+    .limit(10)
+    .toArray();
+  const declarations = await req.db
+    .collection("declarations")
+    .find({
+      manufacturer_ogrn: company.ogrn.toString(),
+    })
+    .skip(0)
+    .limit(10)
+    .toArray();
+  const certificates = await req.db
+    .collection("certificates")
+    .find({
+      applicant_ogrn: company.ogrn.toString(),
+    })
+    .skip(0)
+    .limit(10)
+    .toArray();
+  const regex = new RegExp(company.fullName, "i");
+  const interGasCert = await req.db
+    .collection("interGasCert")
+    .find({
+      manufacturer: { $regex: regex },
+    })
+    .skip(0)
+    .limit(10)
+    .toArray();
   const output = {
     products: products,
     declarations: declarations,
     certificates: certificates,
-    company: company
-  }
+    company: company,
+    interGasCert: interGasCert,
+  };
   // console.log("output");
   // console.log(output);
   res.json(output);
@@ -56,7 +81,7 @@ router.delete("/:id", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   const targetNote = await req.db.collection("notes").findOne({ _id: ObjectId(req.params.id) });
-  console.log('targetNote');
+  console.log("targetNote");
   console.log(targetNote);
   return res.json(targetNote);
 });

@@ -136,12 +136,13 @@ app.use((req, res, next) => {
   // app.use('/static', express.static(__dirname + '/public'));
   app.use("/declarations", require("./api/declarations"));
   app.use("/factories", require("./api/factories"));
+  app.use("/gascert", require("./api/interGasCert"));
+  app.use("/kamkabelWarehouse", require("./api/kamkabelWarehouse"));
   app.use(express.static(path.resolve(__dirname, "../client/build")));
   app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
   });
   await connectMongo();
-
   // app.get("/", (req, res) => {
   //   res.render("index");
   // });
@@ -160,7 +161,7 @@ app.use((req, res, next) => {
   // console.log('client');
   // console.log(client);
 
-  // await fillMongoBaseFromText('./rawdata/rifarSerts.txt', client, 'certificates', [], true);
+  // await fillMongoBaseFromText('./rawdata/kamkabel300821.txt', client, 'kamkabelStorage', [], true);
 
   // pathToFile, database, collection, properties
   const port = process.env.PORT || 3000;
